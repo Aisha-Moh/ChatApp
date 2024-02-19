@@ -19,21 +19,6 @@ export default function Chat({ route }) {
   const [messages, setMessages] = useState([]);
   const currentUser = auth?.currentUser?.uid;
 
-  // useEffect(() => {
-  //   setMessages([
-  //     {
-  //       _id: 1,
-  //       text: "Hello developer",
-  //       createdAt: new Date(),
-  //       user: {
-  //         _id: 2,
-  //         name: "React Native",
-  //         avatar: "https://placeimg.com/140/140/any",
-  //       },
-  //     },
-  //   ]);
-  // }, []);
-
   useEffect(() => {
     const chatId =
       uid > currentUser
@@ -44,12 +29,6 @@ export default function Chat({ route }) {
     const q = query(colRef, orderBy("createdAt", "desc"));
     const docSnap = onSnapshot(q, (onSnap) => {
       const allMsg = onSnap.docs.map((mes) => {
-        //   const createdAt = mes.data().createdAt && mes.data().createdAt.toDate();
-        //   return {
-        //     ...mes.data(),
-        //     createdAt: createdAt || new Date(),
-        //   };
-        // });
         if (mes.data.createdAt) {
           return {
             ...mes.data(),
